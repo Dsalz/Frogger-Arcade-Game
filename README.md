@@ -10,6 +10,7 @@
  
 ## How to Play
 - http://dsalz.github.io/Frogger-Arcade-Game/ is where the game is hosted
+- You can fork this repository to play the game locally.
 - The aim of the game is to cross without getting hit by the nefarious roaches
 - For each hit you lose a life
 - For each succesful cross you get 5 points
