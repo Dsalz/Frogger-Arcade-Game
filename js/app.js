@@ -18,15 +18,25 @@ let playerImg = "images/char-boy.png";
 
 
 
+class GameObject { //Super class with properties and methods which are inherited by all other game classes
+
+    constructor(x,y,sprite){
+        this.x = x;
+        this.y = y;
+        this.sprite = sprite;
+    }
+
+    render(){
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
 
 // Enemy class
-class Enemy {
+class Enemy extends GameObject {
 
 constructor(x,y,pace) {
-    this.x = x;
-    this.y = y;
+    super(x, y, 'images/enemy-bug.png')
     this.pace = pace;
-    this.sprite = 'images/enemy-bug.png';
 };
 
 update(dt){
@@ -41,25 +51,20 @@ update(dt){
     }
 }
 
-render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
-
 }
 
 
 // player class
-class Player{
+class Player extends GameObject{
 
     constructor(x,y){
-        this.x = x;
-        this.y = y;
+
+        super(x,y,playerImg); //setting player image to global variable so that it can be changed to user's input
         this.lives = 5;
         this.greenGems = 0;
         this.blueGems = 0;
         this.orangeGems = 0;
         this.score = 0;
-        this.sprite = playerImg; //setting player image to global variable so that it can be changed to user's input
     }
 
     checkGameOver(){ //checking if player lives are empty 
@@ -164,17 +169,11 @@ class Player{
 }
 
 // gem class
-class Gem {
+class Gem extends GameObject{
 
     constructor(imageUrl, x, y){
-        this.imageUrl = imageUrl;
-        this.x = x;
-        this.y = y;
-        this.type = (this.imageUrl == 'images/gem-blue.png')? 'blue' : (this.imageUrl == 'images/gem-green.png')? 'green' : 'orange';
-    }
-
-    render(){
-        ctx.drawImage(Resources.get(this.imageUrl), this.x, this.y);
+        super( x, y, imageUrl)
+        this.type = (this.sprite == 'images/gem-blue.png')? 'blue' : (this.sprite == 'images/gem-green.png')? 'green' : 'orange';
     }
 
     update(){
